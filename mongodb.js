@@ -1,12 +1,15 @@
 // CRUD
 // DB : E:/web-dev-projects/Database/mongodb/bin/mongod.exe --dbpath=E:/web-dev-projects/Database/mongodb-data
 
-const mongodb = require('mongodb');
-const MongoClient = mongodb.MongoClient;
-const ObjectID = mongodb.ObjectID;
+const { MongoClient, ObjectID } = require('mongodb');
 
 const connectionURL = 'mongodb://127.0.0.1:27017';
 const databaseName = 'task-manager';
+
+const id = new ObjectID();
+
+console.log(id);
+console.log(id.toHexString());
 
 MongoClient.connect(
   connectionURL,
@@ -20,8 +23,9 @@ MongoClient.connect(
 
     // db.collection('users').insertOne(
     //   {
-    //     name: 'Miraz',
-    //     age: 23,
+    //     _id: id,
+    //     name: 'Vikram',
+    //     age: 26,
     //   },
     //   (error, result) => {
     //     if (error) {
