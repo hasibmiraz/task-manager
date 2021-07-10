@@ -27,3 +27,27 @@ me.save()
   .catch((error) => {
     console.log(error);
   });
+
+const Tasks = mongoose.model('Tasks', {
+  description: {
+    type: String,
+  },
+
+  completed: {
+    type: Boolean,
+  },
+});
+
+const task = new Tasks({
+  description: 'Clean the house',
+  completed: true,
+});
+
+task
+  .save()
+  .then(() => {
+    console.log(task);
+  })
+  .catch((error) => {
+    console.log(error);
+  });
