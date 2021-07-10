@@ -17,16 +17,7 @@ MongoClient.connect(
     const db = client.db(databaseName);
 
     // db.collection('users')
-    //   .updateOne(
-    //     {
-    //       _id: new ObjectID('60e86b9670a9d534e842cc2b'),
-    //     },
-    //     {
-    //       $inc: {
-    //         age: 1,
-    //       },
-    //     }
-    //   )
+    //   .deleteMany({ age: 26 })
     //   .then((result) => {
     //     console.log(result);
     //   })
@@ -35,14 +26,9 @@ MongoClient.connect(
     //   });
 
     db.collection('tasks')
-      .updateMany(
-        { completed: false },
-        {
-          $set: {
-            completed: true,
-          },
-        }
-      )
+      .deleteOne({
+        description: 'Jogging',
+      })
       .then((result) => {
         console.log(result);
       })
