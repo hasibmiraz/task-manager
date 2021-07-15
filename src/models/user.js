@@ -12,10 +12,10 @@ const userSchema = new mongoose.Schema({
 
   email: {
     type: String,
-    required: true,
     trim: true,
-    lowercase: true,
     unique: true,
+    required: true,
+    lowercase: true,
     validate(value) {
       if (!validator.isEmail(value)) {
         throw new Error('Invalid Email ID!');
@@ -25,9 +25,9 @@ const userSchema = new mongoose.Schema({
 
   password: {
     type: String,
-    required: true,
     trim: true,
     minlength: 7,
+    required: true,
     validate(value) {
       if (value.toLowerCase().includes('password')) {
         throw new Error(`Password can't containg --Password-- word!`);
