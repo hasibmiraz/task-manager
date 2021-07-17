@@ -4,57 +4,62 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const Task = require('./task');
 
-const userSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: true,
-    trim: true,
-  },
-
-  email: {
-    type: String,
-    trim: true,
-    unique: true,
-    required: true,
-    lowercase: true,
-    validate(value) {
-      if (!validator.isEmail(value)) {
-        throw new Error('Invalid Email ID!');
-      }
+const userSchema = new mongoose.Schema(
+  {
+    name: {
+      type: String,
+      required: true,
+      trim: true,
     },
-  },
 
-  password: {
-    type: String,
-    trim: true,
-    minlength: 7,
-    required: true,
-    validate(value) {
-      if (value.toLowerCase().includes('password')) {
-        throw new Error(`Password can't containg --Password-- word!`);
-      }
-    },
-  },
-
-  age: {
-    type: Number,
-    default: 0,
-    validate(value) {
-      if (value < 0) {
-        throw new Error('Age must be a positive number.');
-      }
-    },
-  },
-
-  tokens: [
-    {
-      token: {
-        type: String,
-        required: true,
+    email: {
+      type: String,
+      trim: true,
+      unique: true,
+      required: true,
+      lowercase: true,
+      validate(value) {
+        if (!validator.isEmail(value)) {
+          throw new Error('Invalid Email ID!');
+        }
       },
     },
-  ],
-});
+
+    password: {
+      type: String,
+      trim: true,
+      minlength: 7,
+      required: true,
+      validate(value) {
+        if (value.toLowerCase().includes('password')) {
+          throw new Error(`Password can't containg --Password-- word!`);
+        }
+      },
+    },
+
+    age: {
+      type: Number,
+      default: 0,
+      validate(value) {
+        if (value < 0) {
+          throw new Error('Age must be a positive number.');
+        }
+      },
+    },
+
+    tokens: [
+      {
+        token: {
+          type: String,
+          required: true,
+        },
+      },
+    ],
+  },
+  {
+    timestamps: true,
+  }
+);
 
 userSchema.virtual('tasks', {
   ref: 'Task',
